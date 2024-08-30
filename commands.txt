@@ -1,1 +1,15 @@
 npm i -D prettier eslint-config-standard eslint-plugin-tailwindcss eslint-config-prettier eslint-plugin-prettier prettier-plugin-tailwindcss
+
+npm i react-hook-form @hookform/resolvers zod
+npm i server-only @radix-ui/react-icons sonner next-themes clsx class-variance-authority tailwind-merge
+tailwindcss-animate
+
+npm i bcryptjs
+npm i -D @types/bcryptjs
+
+npm i -D prisma
+npm i @prisma/client
+
+npx prisma init
+npx prisma migrate dev --name init
+npx prisma studio
