@@ -13,3 +13,6 @@ npm i @prisma/client
 npx prisma init
 npx prisma migrate dev --name init
 npx prisma studio
+
+npx shadcn@latest init
+npx shadcn@latest add button
