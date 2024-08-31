@@ -4,18 +4,7 @@ import ContentBlock from "@/components/page-ui/content-block";
 import SearchForm from "@/components/page-ui/search-form";
 import PetList from "@/components/page-ui/pet-list";
 
-export default async function Page() {
-  const res = await fetch(
-    "https://bytegrad.com/course-assets/projects/petsoft/api/pets",
-  );
-
-  if (!res.ok) {
-    throw new Error("Could not fetch pets!");
-  }
-
-  const data = await res.json();
-
-  console.log(data);
+export default function Page() {
   return (
     <main>
       <div className="flex items-center justify-between py-8 text-white">
@@ -31,7 +20,7 @@ export default async function Page() {
 
         <div className="relative md:col-span-1 md:col-start-1 md:row-span-full md:row-start-2">
           <ContentBlock>
-            <PetList pets={data} />
+            <PetList />
 
             <div className="absolute bottom-4 right-4">
               {/* <PetButton actionType="add" /> */}
