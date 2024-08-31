@@ -3,6 +3,7 @@ import Stats from "@/components/page-ui/stats";
 import ContentBlock from "@/components/page-ui/content-block";
 import SearchForm from "@/components/page-ui/search-form";
 import PetList from "@/components/page-ui/pet-list";
+import PetDetails from "@/components/page-ui/pet-details";
 
 export default function Page() {
   return (
@@ -29,7 +30,9 @@ export default function Page() {
         </div>
 
         <div className="md:col-span-full md:col-start-2 md:row-span-full md:row-start-1">
-          <ContentBlock>{/*  <PetDetails /> */}p</ContentBlock>
+          <ContentBlock>
+            <PetDetails />
+          </ContentBlock>
         </div>
       </div>
     </main>
