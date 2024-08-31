@@ -1,5 +1,9 @@
+"use client";
+
+import { usePetContext } from "@/contexts/pet-context-provider";
+
 export default function Stats() {
-  const numberOfPets = 4;
+  const { numberOfPets } = usePetContext();
 
   return (
     <section className="text-center">
