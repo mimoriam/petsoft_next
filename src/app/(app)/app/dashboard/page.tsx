@@ -4,6 +4,7 @@ import ContentBlock from "@/components/page-ui/content-block";
 import SearchForm from "@/components/page-ui/search-form";
 import PetList from "@/components/page-ui/pet-list";
 import PetDetails from "@/components/page-ui/pet-details";
+import PetButton from "@/components/page-ui/pet-button";
 
 export default function Page() {
   return (
@@ -24,7 +25,7 @@ export default function Page() {
             <PetList />
 
             <div className="absolute bottom-4 right-4">
-              {/* <PetButton actionType="add" /> */}
+              <PetButton actionType="add" />
             </div>
           </ContentBlock>
         </div>
