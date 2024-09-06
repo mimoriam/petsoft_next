@@ -1,5 +1,3 @@
-"use client";
-
 import { usePetContext } from "@/contexts/pet-context-provider";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -16,14 +14,14 @@ export default function PetForm({
   actionType,
   onFormSubmission,
 }: PetFormProps) {
-  const { handleAddPet, selectedPet } = usePetContext();
+  const { handleAddPet, selectedPet, handleEditPet } = usePetContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
-    const newPet = {
+    const pet = {
       name: formData.get("name") as string,
       ownerName: formData.get("ownerName") as string,
       imageUrl: (formData.get("imageUrl") as string) || "",
@@ -31,8 +29,11 @@ export default function PetForm({
       notes: formData.get("notes") as string,
     };
 
-    handleAddPet(newPet);
-    console.log(newPet);
+    if (actionType === "add") {
+      handleAddPet(pet);
+    } else if (actionType === "edit") {
+      handleEditPet(selectedPet!.id, pet);
+    }
 
     // Close the form on submission:
     onFormSubmission();
