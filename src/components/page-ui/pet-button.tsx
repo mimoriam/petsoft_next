@@ -36,9 +36,9 @@ export default function PetButton({
     );
   }
 
-  if (actionType === "edit") {
-    return <Button variant="secondary">{children}</Button>;
-  }
+  // if (actionType === "edit") {
+  //   return <Button variant="secondary">{children}</Button>;
+  // }
 
   return (
     <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
@@ -54,7 +54,9 @@ export default function PetButton({
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a new Pet</DialogTitle>
+          <DialogTitle>
+            {actionType === "add" ? "Add a new pet" : "Edit pet"}
+          </DialogTitle>
         </DialogHeader>
 
         <PetForm
