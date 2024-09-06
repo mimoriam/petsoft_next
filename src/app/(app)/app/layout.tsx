@@ -4,7 +4,6 @@ import AppFooter from "@/components/page-ui/app-footer";
 import AppHeader from "@/components/page-ui/app-header";
 import { Toaster } from "@/components/page-ui/sonner";
 import PetContextProvider from "@/contexts/pet-context-provider";
-import { Pet } from "@/lib/types";
 import SearchContextProvider from "@/contexts/search-context-provider";
 import prisma from "@/lib/db";
 
