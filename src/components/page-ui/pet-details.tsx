@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePetContext } from "@/contexts/pet-context-provider";
 import { Pet } from "@/lib/types";
 import PetButton from "@/components/page-ui/pet-button";
+import { deletePet } from "@/actions/actions";
 
 export default function PetDetails() {
   const { selectedPet } = usePetContext();
@@ -38,8 +39,6 @@ type Props = {
 };
 
 function TopBar({ pet }: Props) {
-  const { handleCheckoutPet } = usePetContext();
-
   return (
     <div className="flex items-center border-b border-light bg-white px-8 py-5">
       <Image
@@ -56,7 +55,7 @@ function TopBar({ pet }: Props) {
         <PetButton actionType="edit">Edit</PetButton>
         <PetButton
           actionType="checkout"
-          onClick={() => handleCheckoutPet(pet.id)}
+          onClick={async () => await deletePet(pet.id)}
         >
           Delete
         </PetButton>
