@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { addPet } from "@/actions/actions";
+import { useFormStatus } from "react-dom";
 
 type PetFormProps = {
   actionType: "add" | "edit";
@@ -16,6 +17,7 @@ export default function PetForm({
   onFormSubmission,
 }: PetFormProps) {
   const { selectedPet } = usePetContext();
+  const { pending } = useFormStatus();
 
   return (
     <form
@@ -74,7 +76,7 @@ export default function PetForm({
         </div>
       </div>
 
-      <Button type="submit" className="mt-5 self-end">
+      <Button type="submit" className="mt-5 self-end" disabled={pending}>
         Add new Pet
       </Button>
     </form>
