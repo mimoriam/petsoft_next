@@ -4,15 +4,21 @@ import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function addPet(formData) {
-  await prisma.pet.create({
-    data: {
-      name: formData.get("name"),
-      ownerName: formData.get("ownerName"),
-      age: parseInt(formData.get("age")),
-      imageUrl: formData.get("imageUrl") || "",
-      notes: formData.get("notes"),
-    },
-  });
+  try {
+    await prisma.pet.create({
+      data: {
+        name: formData.get("name"),
+        ownerName: formData.get("ownerName"),
+        age: parseInt(formData.get("age")),
+        imageUrl: formData.get("imageUrl") || "",
+        notes: formData.get("notes"),
+      },
+    });
+  } catch (err) {
+    return {
+      message: "Error adding pet",
+    };
+  }
 
   revalidatePath("/app", "layout");
 }

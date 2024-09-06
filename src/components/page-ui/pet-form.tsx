@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { addPet } from "@/actions/actions";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 type PetFormProps = {
   actionType: "add" | "edit";
@@ -23,7 +24,12 @@ export default function PetForm({
     <form
       className="flex flex-col"
       action={async (formData) => {
-        await addPet(formData);
+        const err = await addPet(formData);
+
+        if (err) {
+          toast.warning(err.message);
+          return;
+        }
         // Close the dialog:
         onFormSubmission();
       }}
