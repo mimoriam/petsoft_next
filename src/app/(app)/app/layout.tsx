@@ -6,21 +6,14 @@ import { Toaster } from "@/components/page-ui/sonner";
 import PetContextProvider from "@/contexts/pet-context-provider";
 import { Pet } from "@/lib/types";
 import SearchContextProvider from "@/contexts/search-context-provider";
+import prisma from "@/lib/db";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const res = await fetch(
-    "https://bytegrad.com/course-assets/projects/petsoft/api/pets",
-  );
-
-  if (!res.ok) {
-    throw new Error("Could not fetch pets!");
-  }
-
-  const data: Pet[] = await res.json();
+  const data = await prisma.pet.findMany();
 
   return (
     <>
