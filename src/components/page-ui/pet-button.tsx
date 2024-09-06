@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import PetForm from "@/components/page-ui/pet-form";
+import { flushSync } from "react-dom";
 
 type PetButtonProps = {
   actionType: "add" | "edit" | "checkout";
@@ -63,7 +64,11 @@ export default function PetButton({
           // Close form after submission:
           actionType={actionType}
           onFormSubmission={() => {
-            setIsFormOpen(false);
+            // React by default appends all update states at the same time
+            // We use flushSync to make state updates not at the same time
+            flushSync(() => {
+              setIsFormOpen(false);
+            });
           }}
         />
       </DialogContent>

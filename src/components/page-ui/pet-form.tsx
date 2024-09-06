@@ -17,30 +17,29 @@ export default function PetForm({
   actionType,
   onFormSubmission,
 }: PetFormProps) {
-  const { selectedPet } = usePetContext();
+  const { selectedPet, handleAddPet, handleEditPet } = usePetContext();
   const { pending } = useFormStatus();
 
   return (
     <form
       className="flex flex-col"
       action={async (formData) => {
-        if (actionType === "add") {
-          const err = await addPet(formData);
-          if (err) {
-            toast.warning(err.message);
-            return;
-          }
-        } else if (actionType === "edit") {
-          const err = await editPet(selectedPet?.id, formData);
-
-          if (err) {
-            toast.warning(err.message);
-            return;
-          }
-        }
-
         // Close the dialog:
         onFormSubmission();
+
+        const petData = {
+          name: formData.get("name") as string,
+          ownerName: formData.get("ownerName") as string,
+          imageUrl: (formData.get("imageUrl") as string) || "",
+          age: Number(formData.get("age")),
+          notes: formData.get("notes") as string,
+        };
+
+        if (actionType === "add") {
+          await handleAddPet(petData);
+        } else if (actionType === "edit") {
+          await handleEditPet(selectedPet!.id, petData);
+        }
       }}
     >
       <div className="space-y-3">
