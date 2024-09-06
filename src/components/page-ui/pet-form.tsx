@@ -4,9 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { addPet, editPet } from "@/actions/actions";
-import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
 
 type PetFormProps = {
   actionType: "add" | "edit";
@@ -18,7 +15,6 @@ export default function PetForm({
   onFormSubmission,
 }: PetFormProps) {
   const { selectedPet, handleAddPet, handleEditPet } = usePetContext();
-  const { pending } = useFormStatus();
 
   return (
     <form
@@ -90,7 +86,7 @@ export default function PetForm({
         </div>
       </div>
 
-      <Button type="submit" className="mt-5 self-end" disabled={pending}>
+      <Button type="submit" className="mt-5 self-end">
         {actionType === "add" ? "Add new Pet" : "Edit pet"}
       </Button>
     </form>
