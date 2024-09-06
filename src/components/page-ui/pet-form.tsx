@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { addPet } from "@/actions/actions";
+import { addPet, editPet } from "@/actions/actions";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 
@@ -24,12 +24,21 @@ export default function PetForm({
     <form
       className="flex flex-col"
       action={async (formData) => {
-        const err = await addPet(formData);
+        if (actionType === "add") {
+          const err = await addPet(formData);
+          if (err) {
+            toast.warning(err.message);
+            return;
+          }
+        } else if (actionType === "edit") {
+          const err = await editPet(selectedPet?.id, formData);
 
-        if (err) {
-          toast.warning(err.message);
-          return;
+          if (err) {
+            toast.warning(err.message);
+            return;
+          }
         }
+
         // Close the dialog:
         onFormSubmission();
       }}
@@ -83,7 +92,7 @@ export default function PetForm({
       </div>
 
       <Button type="submit" className="mt-5 self-end" disabled={pending}>
-        Add new Pet
+        {actionType === "add" ? "Add new Pet" : "Edit pet"}
       </Button>
     </form>
   );

@@ -22,3 +22,26 @@ export async function addPet(formData) {
 
   revalidatePath("/app", "layout");
 }
+
+export async function editPet(petId, formData) {
+  try {
+    await prisma.pet.update({
+      where: {
+        id: petId,
+      },
+      data: {
+        name: formData.get("name"),
+        ownerName: formData.get("ownerName"),
+        age: parseInt(formData.get("age")),
+        imageUrl: formData.get("imageUrl") || "",
+        notes: formData.get("notes"),
+      },
+    });
+  } catch (err) {
+    return {
+      message: "Error editing pet",
+    };
+  }
+
+  revalidatePath("/app", "layout");
+}
